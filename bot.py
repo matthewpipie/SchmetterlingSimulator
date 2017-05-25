@@ -1,4 +1,5 @@
-import telegram
+from telegram.ext import Updater
+from telegram.ext import CommandHandler
 import json
 import random
 
@@ -42,12 +43,17 @@ def genWord():
 	return msg.replace("@", "@*")
 
 
-
+def simulate(bot, update):
+	bot.send_message(chat_id=update.message.chat_id, text=genWord())
 
 if __name__ == "__main__":
 	tokenFile = open("token.txt", "r")
-	bot = telegram.Bot(token=tokenFile.read())
+	updater = Updater(token=tokenFile.read())
 	tokenFile.close();
-	while True:
-		chatID = bot.getUpdates()[-1].message.chat_id
-		bot.sendMessage(chat_id=chat_id, text=genWord())
+	dispatcher = updater.dispatcher
+	startHandler = CommandHandler('simulate', simulate)
+	dispatcher.add_handler(startHandler)
+	updater.start_polling()
+	#while True:
+	#	chatID = bot.getUpdates()[-1].message.chat_id
+	#	bot.sendMessage(chat_id=chat_id, text=genWord())
