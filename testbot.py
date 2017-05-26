@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from telegram.ext import Updater
-from telegram.ext import CommandHandler
 import json
 import time
 import random
@@ -34,21 +32,14 @@ def genWord():
 	return msg.replace(u"@", u"@​")
 
 
-def simulate(bot, update):
+def simulate():
         print "sending"
 	msg = genWord()
         print "msg: " + msg
-	bot.send_message(chat_id=update.message.chat_id, text=msg)
+	#bot.send_message(chat_id=update.message.chat_id, text=msg)
 	print "sent"
 
 if __name__ == "__main__":
-	tokenFile = open("token.txt", "r")
-	print "loading 3..."
-	updater = Updater(token=tokenFile.read().replace('\n', ''))
-	tokenFile.close();
-	dispatcher = updater.dispatcher
-	startHandler = CommandHandler('simulate', simulate)
-	dispatcher.add_handler(startHandler)
-	print "starting"
-	updater.start_polling()
-	updater.idle()
+        while True:
+                raw_input()
+                simulate()
