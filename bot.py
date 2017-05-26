@@ -3,31 +3,14 @@ from telegram.ext import CommandHandler
 import json
 import random
 
-log = open("Schmetterling.jsonl", "r")
-a = 0;
-wordDict = {}
-startWords = []
-for line in log:
-	a += 1;
-	test = json.loads(line)
-	if 'text' in test:
-		text = json.loads(line)['text']
+wordDictFile = open("wordDict.txt", "r")
+startWordsFile = open("wordDict.txt", "r")
 
-		prevWord = text.split()[0]
-		startWords.append(prevWord)
+wordDict = json.read(wordDictFile)
+startWords = json.read(startWordsFile)
 
-		for word in text.split()[1:] + ['\n']:
-			if (prevWord in wordDict):
-				wordDict[prevWord].append(word)
-			else:
-				wordDict[prevWord] = [word]
-
-			prevWord = word
-	if (a % 1000) == 0:
-		print a
-	if a == 3300:
-		#pass
-		break
+wordsDictFile.close()
+startWordsFile.close()
 
 
 def genWord():
