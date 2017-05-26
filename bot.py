@@ -25,9 +25,9 @@ for line in log:
 			prevWord = word
 	if (a % 1000) == 0:
 		print a
-	if a == 10000:
-		pass
-		#break
+	if a == 3300:
+		#pass
+		break
 
 
 def genWord():
@@ -39,7 +39,7 @@ def genWord():
 		msg += prevWord + " "
 		if random.randint(0, 50) == 0:
 			break;
-	
+
 	return msg.replace("@", "@*")
 
 
@@ -48,7 +48,7 @@ def simulate(bot, update):
 
 if __name__ == "__main__":
 	tokenFile = open("token.txt", "r")
-	updater = Updater(token=tokenFile.read())
+	updater = Updater(token=tokenFile.read().replace('\n', ''))
 	tokenFile.close();
 	dispatcher = updater.dispatcher
 	startHandler = CommandHandler('simulate', simulate)
