@@ -40,7 +40,7 @@ def genWord():
 		if random.randint(0, 50) == 0:
 			break;
 
-	return msg.replace("@", "@*")
+	return msg.replace("@", "@​")
 
 
 def simulate(bot, update):
